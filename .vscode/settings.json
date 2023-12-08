@@ -1,0 +1,4 @@
+{
+    "python.globalModuleInstallation": true,
+    "python.defaultInterpreterPath": "/home/marc/.python3/venv/bin/python"
+}
