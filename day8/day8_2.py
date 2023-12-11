@@ -1,4 +1,4 @@
-import math
+from math import gcd
 
 print("\033c", end='')  # clear terminal
 
@@ -15,21 +15,25 @@ for s in input[2::]:
 keys = nodes.keys()
 
 start = [key for key in keys if key[2]=='A']
-end = [key for key in keys if key[2]=='Z']
+#['QXA', 'PDA', 'TDA', 'QQA', 'PPA', 'AAA']
 
-next = []
-i = 0
-while True:
-    for node in start:
-        next.append(nodes[node][directions[i % len(directions)]])
-    i += 1    
-    sum = 0     # count non-Z-ending, if 0 than all are z-ending
-    for node in next:
-        if node[2] != 'Z':
-            sum += 1
-    if sum < 1:
-        break
-    start = next.copy()
-    next = []
-print(i)
+cycles = []
+for node in start:
+    i = 0
+    while True:
+        next = nodes[node][directions[i % len(directions)]]
+        i += 1            
+        if next[2] == 'Z':
+            break
+        node = next
+        next = ''
+    cycles.append(i)
 
+print(cycles)
+
+# now find least common multiple in the cycles of the starting points
+lcm = cycles.pop()
+for num in cycles:
+    lcm = lcm*num // gcd(lcm, num)
+
+print(lcm)

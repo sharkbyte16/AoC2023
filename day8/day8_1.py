@@ -20,6 +20,6 @@ while True:
     i += 1    
     if next == 'ZZZ':
         break
-print(i)
+print('steps', i)
     
 
